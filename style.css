@@ -1,0 +1,1319 @@
+/* ======================================
+   MIJN BUDGET
+   LICHTE / MODERNE STIJL
+====================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* ======================================
+   BASIS
+====================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #1e293b;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef6ff,
+            #f8fafc,
+            #f1f5f9
+        );
+}
+
+
+/* ======================================
+   APP
+====================================== */
+
+.app {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto;
+    padding: 32px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 15px 45px
+        rgba(15, 23, 42, 0.10);
+
+    animation:
+        appBinnenkomen 0.45s ease;
+}
+
+
+@keyframes appBinnenkomen {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* ======================================
+   HEADER
+====================================== */
+
+.app-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+
+.app-header h1 {
+    margin: 0;
+
+    font-size: 36px;
+    font-weight: 900;
+
+    color: #2563eb;
+
+    letter-spacing: -0.8px;
+}
+
+
+.app-header p {
+    margin:
+        8px 0 0;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+
+/* ======================================
+   MAAND SELECTIE
+====================================== */
+
+.maand-selectie {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 24px;
+    padding: 10px 14px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 14px;
+}
+
+
+.maand-selectie h2 {
+    margin: 0;
+
+    flex: 1;
+
+    text-align: center;
+
+    font-size: 19px;
+
+    color: #334155;
+}
+
+
+.maand-selectie button {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #3d8bfd;
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.maand-selectie button:hover {
+    background: #2563eb;
+
+    transform:
+        scale(1.06);
+
+    box-shadow:
+        0 5px 12px
+        rgba(37, 99, 235, 0.25);
+}
+
+
+.maand-selectie button:active {
+    transform:
+        scale(0.93);
+}
+
+
+/* ======================================
+   OVERZICHT
+====================================== */
+
+.overzicht {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+}
+
+
+.overzicht-kaart {
+    padding: 18px 14px;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    border:
+        1px solid transparent;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.overzicht-kaart:hover {
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(15, 23, 42, 0.08);
+}
+
+
+.overzicht-icoon {
+    display: block;
+
+    font-size: 25px;
+
+    margin-bottom: 7px;
+}
+
+
+.overzicht-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    color: #64748b;
+}
+
+
+.overzicht-kaart strong {
+    display: block;
+
+    font-size: 19px;
+    font-weight: 900;
+}
+
+
+/* ======================================
+   INKOMSTEN KAART
+====================================== */
+
+.inkomsten-kaart {
+    background: #ecfdf5;
+    border-color: #bbf7d0;
+}
+
+
+.inkomsten-kaart strong {
+    color: #15803d;
+}
+
+
+/* ======================================
+   UITGAVEN KAART
+====================================== */
+
+.uitgaven-kaart {
+    background: #fff7ed;
+    border-color: #fed7aa;
+}
+
+
+.uitgaven-kaart strong {
+    color: #c2410c;
+}
+
+
+/* ======================================
+   BESCHIKBAAR
+====================================== */
+
+.beschikbaar-kaart {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+
+.beschikbaar-kaart strong {
+    color: #2563eb;
+}
+
+
+.beschikbaar-kaart strong.negatief {
+    color: #dc2626;
+}
+
+
+/* ======================================
+   SECTIES
+====================================== */
+
+.sectie {
+    margin-bottom: 30px;
+    padding: 22px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(15, 23, 42, 0.04);
+}
+
+
+.sectie-kop {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+
+.sectie-kop h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #1e293b;
+}
+
+
+/* ======================================
+   INKOMST CATEGORIEËN
+====================================== */
+
+.inkomsten-categorieën {
+    display: grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+
+.categorie-inkomst {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 14px;
+
+    border:
+        1px solid #bbf7d0;
+
+    border-radius: 12px;
+
+    background: #f0fdf4;
+
+    color: #166534;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        border-color 0.2s ease;
+}
+
+
+.categorie-inkomst span {
+    font-size: 22px;
+}
+
+
+.categorie-inkomst strong {
+    font-size: 15px;
+}
+
+
+.categorie-inkomst:hover {
+    background: #dcfce7;
+
+    border-color: #86efac;
+
+    transform:
+        translateX(3px);
+}
+
+
+.categorie-inkomst:active {
+    transform:
+        scale(0.98);
+}
+
+
+/* ======================================
+   UITGAVE CATEGORIEËN
+====================================== */
+
+.uitgaven-categorieën {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+}
+
+
+.categorie-uitgave {
+    padding: 12px 10px;
+
+    border:
+        1px solid #fed7aa;
+
+    border-radius: 11px;
+
+    background: #fff7ed;
+
+    color: #9a3412;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        border-color 0.2s ease;
+}
+
+
+.categorie-uitgave:hover {
+    background: #ffedd5;
+
+    border-color: #fdba74;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.categorie-uitgave:active {
+    transform:
+        scale(0.97);
+}
+
+
+/* ======================================
+   TRANSACTIES
+====================================== */
+
+.transacties-lijst {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+
+/* ======================================
+   TRANSACTIE KAART
+====================================== */
+
+.transactie-kaart {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 13px;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.transactie-kaart:hover {
+    background: #f1f5f9;
+
+    transform:
+        translateX(2px);
+
+    box-shadow:
+        0 4px 12px
+        rgba(15, 23, 42, 0.05);
+}
+
+
+/* ======================================
+   TRANSACTIE INFORMATIE
+====================================== */
+
+.transactie-informatie {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.transactie-omschrijving {
+    font-size: 15px;
+
+    font-weight: bold;
+
+    color: #334155;
+
+    word-break: break-word;
+}
+
+
+.transactie-categorie {
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+
+.transactie-datum {
+    font-size: 11px;
+
+    color: #94a3b8;
+}
+
+
+/* ======================================
+   RECHTERKANT TRANSACTIE
+====================================== */
+
+.transactie-rechts {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+
+.transactie-bedrag {
+    font-size: 16px;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+}
+
+
+.inkomsten-bedrag {
+    color: #15803d;
+}
+
+
+.uitgaven-bedrag {
+    color: #dc2626;
+}
+
+
+.herhaling {
+    font-size: 11px;
+
+    color: #64748b;
+
+    white-space: nowrap;
+}
+
+
+/* ======================================
+   ACTIE KNOPPEN
+====================================== */
+
+.transactie-acties {
+    display: flex;
+
+    gap: 5px;
+}
+
+
+.transactie-acties button {
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition:
+        transform 0.15s ease,
+        filter 0.2s ease;
+}
+
+
+.transactie-acties button:hover {
+    transform:
+        scale(1.08);
+
+    filter:
+        brightness(0.97);
+}
+
+
+.bewerk-transactie {
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+
+.verwijder-transactie {
+    background: #fee2e2;
+
+    color: #b91c1c;
+}
+
+
+/* ======================================
+   LEGE LIJST
+====================================== */
+
+.lege-lijst {
+    margin:
+        15px 0 0;
+
+    padding: 14px;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    background: #f8fafc;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+}
+
+
+/* ======================================
+   FORMULIER
+====================================== */
+
+.formulier {
+    margin-bottom: 25px;
+
+    padding: 22px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 18px;
+}
+
+
+.formulier h2 {
+    margin:
+        0 0 18px;
+
+    font-size: 20px;
+
+    color: #334155;
+}
+
+
+.formulier label {
+    display: block;
+
+    margin:
+        13px 0 6px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #475569;
+}
+
+
+.formulier input,
+.formulier select {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding:
+        11px 13px;
+
+    border:
+        2px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.formulier input::placeholder {
+    color: #94a3b8;
+}
+
+
+.formulier input:focus,
+.formulier select:focus {
+    border-color: #3d8bfd;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(61, 139, 253, 0.12);
+}
+
+
+/* ======================================
+   PRIMAIRE KNOP
+====================================== */
+
+.primaire-knop {
+    width: 100%;
+
+    min-height: 50px;
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3d8bfd
+        );
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 14px
+        rgba(37, 99, 235, 0.20);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.primaire-knop:hover {
+    filter:
+        brightness(1.05);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(37, 99, 235, 0.28);
+}
+
+
+.primaire-knop:active {
+    transform:
+        scale(0.97);
+}
+
+
+/* ======================================
+   MAANDRESULTAAT
+====================================== */
+
+.resultaat {
+    margin-bottom: 25px;
+
+    padding: 22px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 18px;
+}
+
+
+.resultaat h2 {
+    margin:
+        0 0 18px;
+
+    font-size: 21px;
+
+    color: #334155;
+}
+
+
+.resultaat-regel {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        11px 0;
+
+    border-bottom:
+        1px solid #e2e8f0;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+
+.resultaat-regel strong {
+    color: #334155;
+
+    font-size: 16px;
+}
+
+
+.resultaat-regel.totaal {
+    margin-top: 4px;
+
+    padding-top: 15px;
+
+    border-bottom: none;
+
+    color: #1e293b;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+.resultaat-regel.totaal strong {
+    color: #2563eb;
+
+    font-size: 21px;
+}
+
+
+.resultaat-regel.totaal strong.negatief {
+    color: #dc2626;
+}
+
+
+/* ======================================
+   ALLES WISSEN
+====================================== */
+
+.wis-knop {
+    width: 100%;
+
+    min-height: 50px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.wis-knop:hover {
+    background: #fecaca;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(185, 28, 28, 0.12);
+}
+
+
+.wis-knop:active {
+    transform:
+        scale(0.97);
+}
+
+
+/* ======================================
+   FOOTER
+====================================== */
+
+footer {
+    margin-top: 24px;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* ======================================
+   FOCUS TOEGANKELIJKHEID
+====================================== */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline:
+        3px solid
+        rgba(59, 130, 246, 0.25);
+
+    outline-offset: 2px;
+}
+
+
+/* ======================================
+   TABLET
+====================================== */
+
+@media (max-width: 650px) {
+
+    .app {
+        padding: 25px;
+    }
+
+}
+
+
+/* ======================================
+   MOBIEL
+====================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+
+        align-items: flex-start;
+    }
+
+
+    .app {
+        margin-top: 5px;
+
+        padding:
+            22px 16px;
+
+        border-radius: 18px;
+    }
+
+
+    .app-header {
+        margin-bottom: 22px;
+    }
+
+
+    .app-header h1 {
+        font-size: 29px;
+    }
+
+
+    .app-header p {
+        font-size: 14px;
+    }
+
+
+    /* ------------------------------
+       MAAND
+    ------------------------------ */
+
+    .maand-selectie {
+        padding:
+            8px 10px;
+    }
+
+
+    .maand-selectie h2 {
+        font-size: 17px;
+    }
+
+
+    .maand-selectie button {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    /* ------------------------------
+       OVERZICHT
+    ------------------------------ */
+
+    .overzicht {
+        grid-template-columns:
+            1fr;
+
+        gap: 9px;
+    }
+
+
+    .overzicht-kaart {
+        display: grid;
+
+        grid-template-columns:
+            42px 1fr auto;
+
+        align-items: center;
+
+        text-align: left;
+
+        padding:
+            13px 15px;
+    }
+
+
+    .overzicht-icoon {
+        margin: 0;
+
+        font-size: 22px;
+    }
+
+
+    .overzicht-label {
+        margin: 0;
+
+        font-size: 14px;
+    }
+
+
+    .overzicht-kaart strong {
+        font-size: 18px;
+    }
+
+
+    /* ------------------------------
+       SECTIES
+    ------------------------------ */
+
+    .sectie {
+        padding: 17px;
+
+        border-radius: 15px;
+    }
+
+
+    .sectie-kop h2 {
+        font-size: 20px;
+    }
+
+
+    /* ------------------------------
+       UITGAVEN
+    ------------------------------ */
+
+    .uitgaven-categorieën {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .categorie-uitgave {
+        min-height: 48px;
+
+        font-size: 13px;
+    }
+
+
+    /* ------------------------------
+       TRANSACTIES
+    ------------------------------ */
+
+    .transactie-kaart {
+        display: grid;
+
+        grid-template-columns:
+            1fr auto;
+
+        gap: 8px;
+
+        padding: 12px;
+    }
+
+
+    .transactie-informatie {
+        grid-column: 1;
+    }
+
+
+    .transactie-rechts {
+        grid-column: 2;
+
+        align-items: flex-end;
+
+        flex-direction: column;
+
+        gap: 6px;
+    }
+
+
+    .transactie-acties {
+        justify-content: flex-end;
+    }
+
+
+    .transactie-bedrag {
+        font-size: 15px;
+    }
+
+
+    /* ------------------------------
+       FORMULIER
+    ------------------------------ */
+
+    .formulier {
+        padding: 17px;
+
+        border-radius: 15px;
+    }
+
+
+    .formulier input,
+    .formulier select {
+        min-height: 50px;
+
+        font-size: 16px;
+    }
+
+
+    .primaire-knop {
+        min-height: 52px;
+
+        font-size: 17px;
+    }
+
+
+    /* ------------------------------
+       RESULTAAT
+    ------------------------------ */
+
+    .resultaat {
+        padding: 17px;
+
+        border-radius: 15px;
+    }
+
+}
+
+
+/* ======================================
+   KLEINE TELEFOONS
+====================================== */
+
+@media (max-width: 400px) {
+
+    body {
+        padding: 7px;
+    }
+
+
+    .app {
+        padding:
+            19px 13px;
+    }
+
+
+    .app-header h1 {
+        font-size: 26px;
+    }
+
+
+    .maand-selectie h2 {
+        font-size: 15px;
+    }
+
+
+    .sectie,
+    .formulier,
+    .resultaat {
+        padding: 14px;
+    }
+
+
+    .uitgaven-categorieën {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .categorie-uitgave {
+        min-height: 45px;
+    }
+
+
+    .resultaat-regel {
+        font-size: 14px;
+    }
+
+
+    .resultaat-regel.totaal {
+        font-size: 16px;
+    }
+
+
+    .resultaat-regel.totaal strong {
+        font-size: 19px;
+    }
+
+
+    .transactie-kaart {
+        gap: 6px;
+    }
+
+
+    .transactie-rechts {
+        max-width: 125px;
+    }
+
+
+    .transactie-bedrag {
+        font-size: 14px;
+    }
+
+}

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#3d8bfd"
+    >
+
+    <meta
+        name="description"
+        content="Mijn persoonlijke budget- en huishoudboekje."
+    >
+
+    <link
+        rel="manifest"
+        href="./manifest.json"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    >
+
+    <title>Mijn Budget</title>
+
+</head>
+
+
+<body>
+
+<main class="app">
+
+    <!-- ==================================
+         TITEL
+    ================================== -->
+
+    <header class="app-header">
+
+        <h1>💰 Mijn Budget</h1>
+
+        <p>
+            Mijn persoonlijke huishoudboekje
+        </p>
+
+    </header>
+
+
+    <!-- ==================================
+         MAAND SELECTIE
+    ================================== -->
+
+    <section class="maand-selectie">
+
+        <button
+            id="vorigeMaand"
+            type="button"
+            aria-label="Vorige maand"
+        >
+            ◀
+        </button>
+
+        <h2 id="huidigeMaand">
+            Augustus 2026
+        </h2>
+
+        <button
+            id="volgendeMaand"
+            type="button"
+            aria-label="Volgende maand"
+        >
+            ▶
+        </button>
+
+    </section>
+
+
+    <!-- ==================================
+         OVERZICHT
+    ================================== -->
+
+    <section class="overzicht">
+
+        <div class="overzicht-kaart inkomsten-kaart">
+
+            <span class="overzicht-icoon">💵</span>
+
+            <span class="overzicht-label">
+                Inkomsten
+            </span>
+
+            <strong id="totaalInkomsten">
+                € 0,00
+            </strong>
+
+        </div>
+
+
+        <div class="overzicht-kaart uitgaven-kaart">
+
+            <span class="overzicht-icoon">💸</span>
+
+            <span class="overzicht-label">
+                Uitgaven
+            </span>
+
+            <strong id="totaalUitgaven">
+                € 0,00
+            </strong>
+
+        </div>
+
+
+        <div class="overzicht-kaart beschikbaar-kaart">
+
+            <span class="overzicht-icoon">💰</span>
+
+            <span class="overzicht-label">
+                Beschikbaar
+            </span>
+
+            <strong id="beschikbaarBedrag">
+                € 0,00
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================
+         INKOMSTEN
+    ================================== -->
+
+    <section class="sectie">
+
+        <div class="sectie-kop">
+
+            <h2>💵 Inkomsten</h2>
+
+        </div>
+
+
+        <div class="inkomsten-categorieën">
+
+            <button
+                class="categorie-inkomst"
+                data-categorie="loon"
+                type="button"
+            >
+                <span>💼</span>
+                <strong>Inkomsten uit loon</strong>
+            </button>
+
+
+            <button
+                class="categorie-inkomst"
+                data-categorie="overheid"
+                type="button"
+            >
+                <span>🏛️</span>
+                <strong>Toeslagen overheid</strong>
+            </button>
+
+
+            <button
+                class="categorie-inkomst"
+                data-categorie="gemeente"
+                type="button"
+            >
+                <span>🏢</span>
+                <strong>Toeslagen gemeente</strong>
+            </button>
+
+        </div>
+
+
+        <div
+            id="inkomstenLijst"
+            class="transacties-lijst"
+        ></div>
+
+
+        <p
+            id="geenInkomsten"
+            class="lege-lijst"
+        >
+            Nog geen inkomsten toegevoegd.
+        </p>
+
+    </section>
+
+
+    <!-- ==================================
+         UITGAVEN
+    ================================== -->
+
+    <section class="sectie">
+
+        <div class="sectie-kop">
+
+            <h2>💸 Uitgaven</h2>
+
+        </div>
+
+
+        <div class="uitgaven-categorieën">
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="wonen"
+                type="button"
+            >
+                🏠 Wonen
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="energie"
+                type="button"
+            >
+                ⚡ Energie & water
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="boodschappen"
+                type="button"
+            >
+                🛒 Boodschappen
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="vervoer"
+                type="button"
+            >
+                🚗 Vervoer
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="verzekeringen"
+                type="button"
+            >
+                🛡️ Verzekeringen
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="abonnementen"
+                type="button"
+            >
+                📱 Abonnementen
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="gezondheid"
+                type="button"
+            >
+                ❤️ Gezondheid
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="vrije-tijd"
+                type="button"
+            >
+                🎮 Vrije tijd
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="kleding"
+                type="button"
+            >
+                👕 Kleding
+            </button>
+
+            <button
+                class="categorie-uitgave"
+                data-categorie="overig"
+                type="button"
+            >
+                📦 Overig
+            </button>
+
+        </div>
+
+
+        <div
+            id="uitgavenLijst"
+            class="transacties-lijst"
+        ></div>
+
+
+        <p
+            id="geenUitgaven"
+            class="lege-lijst"
+        >
+            Nog geen uitgaven toegevoegd.
+        </p>
+
+    </section>
+
+
+    <!-- ==================================
+         NIEUWE INKOMST
+    ================================== -->
+
+    <section
+        id="inkomstenFormulier"
+        class="formulier"
+    >
+
+        <h2>➕ Inkomst toevoegen</h2>
+
+
+        <label for="inkomstOmschrijving">
+            Omschrijving
+        </label>
+
+        <input
+            type="text"
+            id="inkomstOmschrijving"
+            placeholder="Bijvoorbeeld: Salaris"
+            autocomplete="off"
+        >
+
+
+        <label for="inkomstBedrag">
+            Bedrag
+        </label>
+
+        <input
+            type="number"
+            id="inkomstBedrag"
+            placeholder="0,00"
+            min="0"
+            step="0.01"
+            inputmode="decimal"
+        >
+
+
+        <label for="inkomstCategorie">
+            Categorie
+        </label>
+
+        <select id="inkomstCategorie">
+
+            <option value="">
+                Kies een categorie
+            </option>
+
+            <option value="loon">
+                Inkomsten uit loon
+            </option>
+
+            <option value="overheid">
+                Toeslagen overheid
+            </option>
+
+            <option value="gemeente">
+                Toeslagen gemeente
+            </option>
+
+        </select>
+
+
+        <label for="inkomstDatum">
+            Datum
+        </label>
+
+        <input
+            type="date"
+            id="inkomstDatum"
+        >
+
+
+        <label for="inkomstHerhaling">
+            Herhaling
+        </label>
+
+        <select id="inkomstHerhaling">
+
+            <option value="eenmalig">
+                Eenmalig
+            </option>
+
+            <option value="maandelijks">
+                Maandelijks
+            </option>
+
+            <option value="per_kwartaal">
+                Per kwartaal
+            </option>
+
+        </select>
+
+
+        <button
+            id="inkomstOpslaan"
+            type="button"
+            class="primaire-knop"
+        >
+            💾 Inkomst opslaan
+        </button>
+
+    </section>
+
+
+    <!-- ==================================
+         NIEUWE UITGAVE
+    ================================== -->
+
+    <section
+        id="uitgavenFormulier"
+        class="formulier"
+    >
+
+        <h2>➕ Uitgave toevoegen</h2>
+
+
+        <label for="uitgaveOmschrijving">
+            Omschrijving
+        </label>
+
+        <input
+            type="text"
+            id="uitgaveOmschrijving"
+            placeholder="Bijvoorbeeld: Boodschappen"
+            autocomplete="off"
+        >
+
+
+        <label for="uitgaveBedrag">
+            Bedrag
+        </label>
+
+        <input
+            type="number"
+            id="uitgaveBedrag"
+            placeholder="0,00"
+            min="0"
+            step="0.01"
+            inputmode="decimal"
+        >
+
+
+        <label for="uitgaveCategorie">
+            Categorie
+        </label>
+
+        <select id="uitgaveCategorie">
+
+            <option value="">
+                Kies een categorie
+            </option>
+
+            <option value="wonen">
+                Wonen
+            </option>
+
+            <option value="energie">
+                Energie & water
+            </option>
+
+            <option value="boodschappen">
+                Boodschappen
+            </option>
+
+            <option value="vervoer">
+                Vervoer
+            </option>
+
+            <option value="verzekeringen">
+                Verzekeringen
+            </option>
+
+            <option value="abonnementen">
+                Abonnementen
+            </option>
+
+            <option value="gezondheid">
+                Gezondheid
+            </option>
+
+            <option value="vrije-tijd">
+                Vrije tijd
+            </option>
+
+            <option value="kleding">
+                Kleding
+            </option>
+
+            <option value="overig">
+                Overig
+            </option>
+
+        </select>
+
+
+        <label for="uitgaveDatum">
+            Datum
+        </label>
+
+        <input
+            type="date"
+            id="uitgaveDatum"
+        >
+
+
+        <label for="uitgaveHerhaling">
+            Herhaling
+        </label>
+
+        <select id="uitgaveHerhaling">
+
+            <option value="eenmalig">
+                Eenmalig
+            </option>
+
+            <option value="maandelijks">
+                Maandelijks
+            </option>
+
+            <option value="per_kwartaal">
+                Per kwartaal
+            </option>
+
+        </select>
+
+
+        <button
+            id="uitgaveOpslaan"
+            type="button"
+            class="primaire-knop"
+        >
+            💾 Uitgave opslaan
+        </button>
+
+    </section>
+
+
+    <!-- ==================================
+         MAANDRESULTAAT
+    ================================== -->
+
+    <section class="resultaat">
+
+        <h2>📊 Maandoverzicht</h2>
+
+
+        <div class="resultaat-regel">
+
+            <span>
+                Totale inkomsten
+            </span>
+
+            <strong id="resultaatInkomsten">
+                € 0,00
+            </strong>
+
+        </div>
+
+
+        <div class="resultaat-regel">
+
+            <span>
+                Totale uitgaven
+            </span>
+
+            <strong id="resultaatUitgaven">
+                € 0,00
+            </strong>
+
+        </div>
+
+
+        <div class="resultaat-regel totaal">
+
+            <span>
+                Overgebleven
+            </span>
+
+            <strong id="resultaatOver">
+                € 0,00
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================
+         ALLES WISSEN
+    ================================== -->
+
+    <button
+        id="allesWissen"
+        type="button"
+        class="wis-knop"
+    >
+        🗑️ Alles wissen
+    </button>
+
+
+    <!-- ==================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+        Made by Matthijs Karst Boersma
+    </footer>
+
+</main>
+
+
+<script src="./script.js"></script>
+
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            navigator.serviceWorker
+                .register("./sw.js")
+                .then(
+                    registratie => {
+
+                        console.log(
+                            "Service Worker actief:",
+                            registratie.scope
+                        );
+
+                    }
+                )
+                .catch(
+                    fout => {
+
+                        console.error(
+                            "Service Worker fout:",
+                            fout
+                        );
+
+                    }
+                );
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>
