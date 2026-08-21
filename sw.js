@@ -2,7 +2,7 @@
 // MIJN BUDGET - SERVICE WORKER
 // ======================================
 
-const CACHE_NAME = "mijn-budget-v2";
+const CACHE_NAME = "mijn-budget-v3";
 
 const APP_BESTANDEN = [
     "./",
