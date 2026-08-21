@@ -39,13 +39,16 @@
 
 <main class="app">
 
+
     <!-- ==================================
-         TITEL
+         HEADER
     ================================== -->
 
     <header class="app-header">
 
-        <h1>💰 Mijn Budget</h1>
+        <h1>
+            💰 Mijn Budget
+        </h1>
 
         <p>
             Mijn persoonlijke huishoudboekje
@@ -91,7 +94,9 @@
 
         <div class="overzicht-kaart inkomsten-kaart">
 
-            <span class="overzicht-icoon">💵</span>
+            <span class="overzicht-icoon">
+                💵
+            </span>
 
             <span class="overzicht-label">
                 Inkomsten
@@ -106,7 +111,9 @@
 
         <div class="overzicht-kaart uitgaven-kaart">
 
-            <span class="overzicht-icoon">💸</span>
+            <span class="overzicht-icoon">
+                💸
+            </span>
 
             <span class="overzicht-label">
                 Uitgaven
@@ -121,7 +128,9 @@
 
         <div class="overzicht-kaart beschikbaar-kaart">
 
-            <span class="overzicht-icoon">💰</span>
+            <span class="overzicht-icoon">
+                💰
+            </span>
 
             <span class="overzicht-label">
                 Beschikbaar
@@ -144,7 +153,9 @@
 
         <div class="sectie-kop">
 
-            <h2>💵 Inkomsten</h2>
+            <h2>
+                💵 Inkomsten
+            </h2>
 
         </div>
 
@@ -207,10 +218,14 @@
 
         <div class="sectie-kop">
 
-            <h2>💸 Uitgaven</h2>
+            <h2>
+                💸 Uitgaven
+            </h2>
 
         </div>
 
+
+        <!-- CATEGORIE FILTERS -->
 
         <div class="uitgaven-categorieën">
 
@@ -297,6 +312,55 @@
         </div>
 
 
+        <!-- ==================================
+             ACTIEVE CATEGORIE
+        ================================== -->
+
+        <div
+            id="categorieOverzicht"
+            class="categorie-overzicht verborgen"
+        >
+
+            <div>
+
+                <span class="categorie-overzicht-label">
+                    Geselecteerde categorie
+                </span>
+
+                <strong id="actieveCategorie">
+                    Verzekeringen
+                </strong>
+
+            </div>
+
+
+            <div class="categorie-totaal">
+
+                <span>
+                    Totaal
+                </span>
+
+                <strong id="categorieTotaal">
+                    € 0,00
+                </strong>
+
+            </div>
+
+
+            <button
+                id="alleUitgaven"
+                type="button"
+            >
+                ✕ Alle uitgaven
+            </button>
+
+        </div>
+
+
+        <!-- ==================================
+             UITGAVENLIJST
+        ================================== -->
+
         <div
             id="uitgavenLijst"
             class="transacties-lijst"
@@ -322,7 +386,9 @@
         class="formulier"
     >
 
-        <h2>➕ Inkomst toevoegen</h2>
+        <h2>
+            ➕ Inkomst toevoegen
+        </h2>
 
 
         <label for="inkomstOmschrijving">
@@ -400,7 +466,7 @@
                 Maandelijks
             </option>
 
-            <option value="per_kwartaal">
+            <option value="per kwartaal">
                 Per kwartaal
             </option>
 
@@ -427,7 +493,9 @@
         class="formulier"
     >
 
-        <h2>➕ Uitgave toevoegen</h2>
+        <h2>
+            ➕ Uitgave toevoegen
+        </h2>
 
 
         <label for="uitgaveOmschrijving">
@@ -533,7 +601,7 @@
                 Maandelijks
             </option>
 
-            <option value="per_kwartaal">
+            <option value="per kwartaal">
                 Per kwartaal
             </option>
 
@@ -557,7 +625,9 @@
 
     <section class="resultaat">
 
-        <h2>📊 Maandoverzicht</h2>
+        <h2>
+            📊 Maandoverzicht
+        </h2>
 
 
         <div class="resultaat-regel">
@@ -621,6 +691,7 @@
     <footer>
         Made by Matthijs Karst Boersma
     </footer>
+
 
 </main>
 
