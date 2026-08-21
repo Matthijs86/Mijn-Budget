@@ -3,14 +3,14 @@
    LICHTE / MODERNE STIJL
 ====================================== */
 
-* {
-    box-sizing: border-box;
-}
-
 
 /* ======================================
    BASIS
 ====================================== */
+
+* {
+    box-sizing: border-box;
+}
 
 html {
     scroll-behavior: smooth;
@@ -91,7 +91,6 @@ body {
     margin-bottom: 28px;
 }
 
-
 .app-header h1 {
     margin: 0;
 
@@ -103,13 +102,11 @@ body {
     letter-spacing: -0.8px;
 }
 
-
 .app-header p {
     margin:
         8px 0 0;
 
     color: #64748b;
-
     font-size: 15px;
 }
 
@@ -120,7 +117,6 @@ body {
 
 .maand-selectie {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
@@ -137,7 +133,6 @@ body {
     border-radius: 14px;
 }
 
-
 .maand-selectie h2 {
     margin: 0;
 
@@ -150,7 +145,6 @@ body {
     color: #334155;
 }
 
-
 .maand-selectie button {
     width: 42px;
     height: 42px;
@@ -159,6 +153,7 @@ body {
     border-radius: 10px;
 
     background: #3d8bfd;
+
     color: #ffffff;
 
     font-size: 16px;
@@ -172,7 +167,6 @@ body {
         box-shadow 0.2s ease;
 }
 
-
 .maand-selectie button:hover {
     background: #2563eb;
 
@@ -183,7 +177,6 @@ body {
         0 5px 12px
         rgba(37, 99, 235, 0.25);
 }
-
 
 .maand-selectie button:active {
     transform:
@@ -206,7 +199,6 @@ body {
     margin-bottom: 30px;
 }
 
-
 .overzicht-kaart {
     padding: 18px 14px;
 
@@ -222,7 +214,6 @@ body {
         box-shadow 0.2s ease;
 }
 
-
 .overzicht-kaart:hover {
     transform:
         translateY(-3px);
@@ -232,7 +223,6 @@ body {
         rgba(15, 23, 42, 0.08);
 }
 
-
 .overzicht-icoon {
     display: block;
 
@@ -240,7 +230,6 @@ body {
 
     margin-bottom: 7px;
 }
-
 
 .overzicht-label {
     display: block;
@@ -253,7 +242,6 @@ body {
     color: #64748b;
 }
 
-
 .overzicht-kaart strong {
     display: block;
 
@@ -262,50 +250,40 @@ body {
 }
 
 
-/* ======================================
-   INKOMSTEN KAART
-====================================== */
+/* Inkomsten */
 
 .inkomsten-kaart {
     background: #ecfdf5;
     border-color: #bbf7d0;
 }
 
-
 .inkomsten-kaart strong {
     color: #15803d;
 }
 
 
-/* ======================================
-   UITGAVEN KAART
-====================================== */
+/* Uitgaven */
 
 .uitgaven-kaart {
     background: #fff7ed;
     border-color: #fed7aa;
 }
 
-
 .uitgaven-kaart strong {
     color: #c2410c;
 }
 
 
-/* ======================================
-   BESCHIKBAAR
-====================================== */
+/* Beschikbaar */
 
 .beschikbaar-kaart {
     background: #eff6ff;
     border-color: #bfdbfe;
 }
 
-
 .beschikbaar-kaart strong {
     color: #2563eb;
 }
-
 
 .beschikbaar-kaart strong.negatief {
     color: #dc2626;
@@ -332,7 +310,6 @@ body {
         rgba(15, 23, 42, 0.04);
 }
 
-
 .sectie-kop {
     display: flex;
 
@@ -341,7 +318,6 @@ body {
 
     margin-bottom: 16px;
 }
-
 
 .sectie-kop h2 {
     margin: 0;
@@ -359,14 +335,12 @@ body {
 .inkomsten-categorieën {
     display: grid;
 
-    grid-template-columns:
-        1fr;
+    grid-template-columns: 1fr;
 
     gap: 10px;
 
     margin-bottom: 18px;
 }
-
 
 .categorie-inkomst {
     display: flex;
@@ -398,16 +372,13 @@ body {
         border-color 0.2s ease;
 }
 
-
 .categorie-inkomst span {
     font-size: 22px;
 }
 
-
 .categorie-inkomst strong {
     font-size: 15px;
 }
-
 
 .categorie-inkomst:hover {
     background: #dcfce7;
@@ -416,12 +387,6 @@ body {
 
     transform:
         translateX(3px);
-}
-
-
-.categorie-inkomst:active {
-    transform:
-        scale(0.98);
 }
 
 
@@ -440,8 +405,9 @@ body {
     margin-bottom: 18px;
 }
 
-
 .categorie-uitgave {
+    min-height: 46px;
+
     padding: 12px 10px;
 
     border:
@@ -461,9 +427,9 @@ body {
     transition:
         background 0.2s ease,
         transform 0.15s ease,
-        border-color 0.2s ease;
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
-
 
 .categorie-uitgave:hover {
     background: #ffedd5;
@@ -475,9 +441,170 @@ body {
 }
 
 
-.categorie-uitgave:active {
+/* ACTIEVE CATEGORIE */
+
+.categorie-uitgave.actief {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3d8bfd
+        );
+
+    border-color: #2563eb;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 6px 16px
+        rgba(37, 99, 235, 0.22);
+
     transform:
-        scale(0.97);
+        translateY(-2px);
+}
+
+.categorie-uitgave.actief:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #2563eb
+        );
+}
+
+
+/* ======================================
+   CATEGORIE OVERZICHT
+====================================== */
+
+.categorie-overzicht {
+    display: grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    gap: 15px;
+
+    align-items: center;
+
+    margin-bottom: 16px;
+
+    padding: 16px;
+
+    background: #eff6ff;
+
+    border:
+        1px solid #bfdbfe;
+
+    border-radius: 14px;
+
+    animation:
+        categorieBinnenkomen 0.25s ease;
+}
+
+@keyframes categorieBinnenkomen {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+.categorie-overzicht.verborgen {
+    display: none;
+}
+
+.categorie-overzicht-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    color: #64748b;
+}
+
+.categorie-overzicht > div:first-child strong {
+    display: block;
+
+    font-size: 17px;
+
+    color: #1d4ed8;
+}
+
+.categorie-totaal {
+    text-align: right;
+}
+
+.categorie-totaal span {
+    display: block;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    color: #64748b;
+}
+
+.categorie-totaal strong {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 20px;
+
+    color: #dc2626;
+}
+
+#alleUitgaven {
+    grid-column:
+        1 / -1;
+
+    width: 100%;
+
+    min-height: 40px;
+
+    padding: 9px 12px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+#alleUitgaven:hover {
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+
+    transform:
+        translateY(-1px);
 }
 
 
@@ -493,19 +620,12 @@ body {
     gap: 9px;
 }
 
-
-/* ======================================
-   TRANSACTIE KAART
-====================================== */
-
-.transactie-kaart {
+.transactie {
     display: flex;
 
     align-items: center;
 
-    justify-content: space-between;
-
-    gap: 15px;
+    gap: 12px;
 
     padding: 13px;
 
@@ -518,105 +638,68 @@ body {
 
     transition:
         background 0.2s ease,
-        transform 0.15s ease,
-        box-shadow 0.2s ease;
+        transform 0.15s ease;
 }
 
-
-.transactie-kaart:hover {
+.transactie:hover {
     background: #f1f5f9;
 
     transform:
         translateX(2px);
-
-    box-shadow:
-        0 4px 12px
-        rgba(15, 23, 42, 0.05);
 }
 
-
-/* ======================================
-   TRANSACTIE INFORMATIE
-====================================== */
-
-.transactie-informatie {
+.transactie-info {
     flex: 1;
 
     min-width: 0;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 3px;
 }
 
-
 .transactie-omschrijving {
-    font-size: 15px;
+    display: block;
 
     font-weight: bold;
+
+    font-size: 15px;
 
     color: #334155;
 
     word-break: break-word;
 }
 
+.transactie-details {
+    display: block;
 
-.transactie-categorie {
+    margin-top: 4px;
+
     font-size: 12px;
 
     color: #64748b;
 }
 
-
-.transactie-datum {
-    font-size: 11px;
-
-    color: #94a3b8;
-}
-
-
-/* ======================================
-   RECHTERKANT TRANSACTIE
-====================================== */
-
 .transactie-rechts {
     display: flex;
 
-    align-items: center;
+    flex-direction: column;
 
-    gap: 8px;
+    align-items: flex-end;
+
+    gap: 7px;
 
     flex-shrink: 0;
 }
-
 
 .transactie-bedrag {
     font-size: 16px;
 
     font-weight: 900;
-
-    white-space: nowrap;
 }
 
-
-.inkomsten-bedrag {
+.transactie-inkomst .transactie-bedrag {
     color: #15803d;
 }
 
-
-.uitgaven-bedrag {
+.transactie-uitgave .transactie-bedrag {
     color: #dc2626;
-}
-
-
-.herhaling {
-    font-size: 11px;
-
-    color: #64748b;
-
-    white-space: nowrap;
 }
 
 
@@ -629,7 +712,6 @@ body {
 
     gap: 5px;
 }
-
 
 .transactie-acties button {
     width: 34px;
@@ -647,25 +729,19 @@ body {
 
     transition:
         transform 0.15s ease,
-        filter 0.2s ease;
+        background 0.2s ease;
 }
-
 
 .transactie-acties button:hover {
     transform:
         scale(1.08);
-
-    filter:
-        brightness(0.97);
 }
-
 
 .bewerk-transactie {
     background: #dbeafe;
 
     color: #1d4ed8;
 }
-
 
 .verwijder-transactie {
     background: #fee2e2;
@@ -713,7 +789,6 @@ body {
     border-radius: 18px;
 }
 
-
 .formulier h2 {
     margin:
         0 0 18px;
@@ -722,7 +797,6 @@ body {
 
     color: #334155;
 }
-
 
 .formulier label {
     display: block;
@@ -736,7 +810,6 @@ body {
 
     color: #475569;
 }
-
 
 .formulier input,
 .formulier select {
@@ -765,11 +838,9 @@ body {
         box-shadow 0.2s ease;
 }
 
-
 .formulier input::placeholder {
     color: #94a3b8;
 }
-
 
 .formulier input:focus,
 .formulier select:focus {
@@ -823,7 +894,6 @@ body {
         filter 0.2s ease;
 }
 
-
 .primaire-knop:hover {
     filter:
         brightness(1.05);
@@ -835,7 +905,6 @@ body {
         0 8px 18px
         rgba(37, 99, 235, 0.28);
 }
-
 
 .primaire-knop:active {
     transform:
@@ -860,7 +929,6 @@ body {
     border-radius: 18px;
 }
 
-
 .resultaat h2 {
     margin:
         0 0 18px;
@@ -869,7 +937,6 @@ body {
 
     color: #334155;
 }
-
 
 .resultaat-regel {
     display: flex;
@@ -891,13 +958,11 @@ body {
     font-size: 15px;
 }
 
-
 .resultaat-regel strong {
     color: #334155;
 
     font-size: 16px;
 }
-
 
 .resultaat-regel.totaal {
     margin-top: 4px;
@@ -913,16 +978,10 @@ body {
     font-weight: bold;
 }
 
-
 .resultaat-regel.totaal strong {
     color: #2563eb;
 
     font-size: 21px;
-}
-
-
-.resultaat-regel.totaal strong.negatief {
-    color: #dc2626;
 }
 
 
@@ -957,7 +1016,6 @@ body {
         box-shadow 0.2s ease;
 }
 
-
 .wis-knop:hover {
     background: #fecaca;
 
@@ -968,7 +1026,6 @@ body {
         0 6px 15px
         rgba(185, 28, 28, 0.12);
 }
-
 
 .wis-knop:active {
     transform:
@@ -996,12 +1053,13 @@ footer {
 
 
 /* ======================================
-   FOCUS TOEGANKELIJKHEID
+   FOCUS
 ====================================== */
 
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
+
     outline:
         3px solid
         rgba(59, 130, 246, 0.25);
@@ -1061,9 +1119,7 @@ select:focus-visible {
     }
 
 
-    /* ------------------------------
-       MAAND
-    ------------------------------ */
+    /* MAAND */
 
     .maand-selectie {
         padding:
@@ -1082,9 +1138,7 @@ select:focus-visible {
     }
 
 
-    /* ------------------------------
-       OVERZICHT
-    ------------------------------ */
+    /* OVERZICHT */
 
     .overzicht {
         grid-template-columns:
@@ -1128,9 +1182,7 @@ select:focus-visible {
     }
 
 
-    /* ------------------------------
-       SECTIES
-    ------------------------------ */
+    /* SECTIES */
 
     .sectie {
         padding: 17px;
@@ -1144,9 +1196,7 @@ select:focus-visible {
     }
 
 
-    /* ------------------------------
-       UITGAVEN
-    ------------------------------ */
+    /* UITGAVEN */
 
     .uitgaven-categorieën {
         grid-template-columns:
@@ -1161,11 +1211,29 @@ select:focus-visible {
     }
 
 
-    /* ------------------------------
-       TRANSACTIES
-    ------------------------------ */
+    /* CATEGORIE OVERZICHT */
 
-    .transactie-kaart {
+    .categorie-overzicht {
+        grid-template-columns:
+            1fr auto;
+
+        padding: 14px;
+    }
+
+
+    .categorie-overzicht > div:first-child strong {
+        font-size: 15px;
+    }
+
+
+    .categorie-totaal strong {
+        font-size: 18px;
+    }
+
+
+    /* TRANSACTIES */
+
+    .transactie {
         display: grid;
 
         grid-template-columns:
@@ -1177,7 +1245,7 @@ select:focus-visible {
     }
 
 
-    .transactie-informatie {
+    .transactie-info {
         grid-column: 1;
     }
 
@@ -1185,11 +1253,9 @@ select:focus-visible {
     .transactie-rechts {
         grid-column: 2;
 
+        grid-row: 1;
+
         align-items: flex-end;
-
-        flex-direction: column;
-
-        gap: 6px;
     }
 
 
@@ -1198,14 +1264,7 @@ select:focus-visible {
     }
 
 
-    .transactie-bedrag {
-        font-size: 15px;
-    }
-
-
-    /* ------------------------------
-       FORMULIER
-    ------------------------------ */
+    /* FORMULIER */
 
     .formulier {
         padding: 17px;
@@ -1229,9 +1288,7 @@ select:focus-visible {
     }
 
 
-    /* ------------------------------
-       RESULTAAT
-    ------------------------------ */
+    /* RESULTAAT */
 
     .resultaat {
         padding: 17px;
@@ -1287,6 +1344,17 @@ select:focus-visible {
     }
 
 
+    .categorie-overzicht {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .categorie-totaal {
+        text-align: left;
+    }
+
+
     .resultaat-regel {
         font-size: 14px;
     }
@@ -1299,21 +1367,6 @@ select:focus-visible {
 
     .resultaat-regel.totaal strong {
         font-size: 19px;
-    }
-
-
-    .transactie-kaart {
-        gap: 6px;
-    }
-
-
-    .transactie-rechts {
-        max-width: 125px;
-    }
-
-
-    .transactie-bedrag {
-        font-size: 14px;
     }
 
 }
