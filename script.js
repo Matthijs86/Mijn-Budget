@@ -7,11 +7,8 @@
 // OPSLAG
 // ======================================
 
-const OPSLAG_INKOMSTEN =
-    "mijnBudgetInkomsten";
-
-const OPSLAG_UITGAVEN =
-    "mijnBudgetUitgaven";
+const OPSLAG_INKOMSTEN = "mijnBudgetInkomsten";
+const OPSLAG_UITGAVEN = "mijnBudgetUitgaven";
 
 
 // ======================================
@@ -96,6 +93,20 @@ const uitgaveHerhaling =
 
 const uitgaveOpslaan =
     document.getElementById("uitgaveOpslaan");
+
+
+// Categorie filter
+const categorieOverzicht =
+    document.getElementById("categorieOverzicht");
+
+const actieveCategorie =
+    document.getElementById("actieveCategorie");
+
+const categorieTotaal =
+    document.getElementById("categorieTotaal");
+
+const alleUitgavenKnop =
+    document.getElementById("alleUitgaven");
 
 
 // Resultaat
@@ -187,7 +198,7 @@ function uitgavenOpslaan() {
 
 
 // ======================================
-// Geselecteerde maand
+// MAAND
 // ======================================
 
 let geselecteerdeMaand =
@@ -196,6 +207,70 @@ let geselecteerdeMaand =
         new Date().getMonth(),
         1
     );
+
+
+// ======================================
+// ACTIEVE CATEGORIE
+// ======================================
+
+let actieveUitgavenCategorie = null;
+
+
+// ======================================
+// CATEGORIE NAMEN
+// ======================================
+
+const categorieNamen = {
+
+    wonen:
+        "🏠 Wonen",
+
+    energie:
+        "⚡ Energie & water",
+
+    boodschappen:
+        "🛒 Boodschappen",
+
+    vervoer:
+        "🚗 Vervoer",
+
+    verzekeringen:
+        "🛡️ Verzekeringen",
+
+    abonnementen:
+        "📱 Abonnementen",
+
+    gezondheid:
+        "❤️ Gezondheid",
+
+    "vrije-tijd":
+        "🎮 Vrije tijd",
+
+    kleding:
+        "👕 Kleding",
+
+    overig:
+        "📦 Overig"
+
+};
+
+
+// ======================================
+// INKOMST CATEGORIE NAMEN
+// ======================================
+
+const inkomstenCategorieNamen = {
+
+    loon:
+        "💼 Inkomsten uit loon",
+
+    overheid:
+        "🏛️ Toeslagen overheid",
+
+    gemeente:
+        "🏢 Toeslagen gemeente"
+
+};
 
 
 // ======================================
@@ -213,8 +288,8 @@ function maandNaam(datum) {
             }
         );
 
-    return naam.charAt(0).toUpperCase()
-        + naam.slice(1);
+    return naam.charAt(0).toUpperCase() +
+        naam.slice(1);
 
 }
 
@@ -234,47 +309,24 @@ function maandWeergeven() {
 
 
 // ======================================
-// DATUM OMZETTEN
+// DATUM CONTROLEREN
 // ======================================
 
-function veiligeDatum(datum) {
-
-    if (!datum) {
-        return null;
-    }
-
-    const delen =
-        datum.split("-");
-
-    if (delen.length !== 3) {
-        return new Date(datum);
-    }
-
-    return new Date(
-        Number(delen[0]),
-        Number(delen[1]) - 1,
-        Number(delen[2])
-    );
-
-}
-
-
-// ======================================
-// CONTROLE NORMALE DATUM
-// ======================================
-
-function valtInMaand(
+function valtInGeselecteerdeMaand(
     datum
 ) {
 
-    const datumObject =
-        veiligeDatum(datum);
-
-    if (!datumObject) {
+    if (!datum) {
         return false;
     }
 
+    const datumObject =
+        new Date(
+            datum + "T00:00:00"
+        );
+
     return (
+
         datumObject.getFullYear() ===
             geselecteerdeMaand.getFullYear()
 
@@ -282,113 +334,8 @@ function valtInMaand(
 
         datumObject.getMonth() ===
             geselecteerdeMaand.getMonth()
+
     );
-
-}
-
-
-// ======================================
-// CONTROLE HERHALING
-// ======================================
-
-function hoortInMaand(
-    item
-) {
-
-    const datum =
-        veiligeDatum(item.datum);
-
-    if (!datum) {
-        return false;
-    }
-
-
-    const jaar =
-        geselecteerdeMaand.getFullYear();
-
-    const maand =
-        geselecteerdeMaand.getMonth();
-
-
-    const startJaar =
-        datum.getFullYear();
-
-    const startMaand =
-        datum.getMonth();
-
-
-    // ==============================
-    // EENMALIG
-    // ==============================
-
-    if (
-        !item.herhaling ||
-        item.herhaling === "eenmalig" ||
-        item.herhaling === "geen"
-    ) {
-
-        return (
-            startJaar === jaar &&
-            startMaand === maand
-        );
-
-    }
-
-
-    // ==============================
-    // MAANDELIJKS
-    // ==============================
-
-    if (
-        item.herhaling ===
-        "maandelijks"
-    ) {
-
-        return (
-            jaar > startJaar
-
-            ||
-
-            (
-                jaar === startJaar &&
-                maand >= startMaand
-            )
-        );
-
-    }
-
-
-    // ==============================
-    // PER KWARTAAL
-    // ==============================
-
-    if (
-        item.herhaling ===
-        "per_kwartaal"
-    ) {
-
-        const startTotaalMaanden =
-            startJaar * 12 +
-            startMaand;
-
-        const huidigeTotaalMaanden =
-            jaar * 12 +
-            maand;
-
-        const verschil =
-            huidigeTotaalMaanden -
-            startTotaalMaanden;
-
-
-        return (
-            verschil >= 0 &&
-            verschil % 3 === 0
-        );
-
-    }
-
-
-    return false;
 
 }
 
@@ -427,12 +374,10 @@ function bedragLezen(waarde) {
 
     }
 
-
     const schoon =
         waarde
             .replace(",", ".")
             .replace(/[^\d.-]/g, "");
-
 
     return Number(schoon) || 0;
 
@@ -448,20 +393,20 @@ function vandaagVoorInput() {
     const vandaag =
         new Date();
 
+    const jaar =
+        vandaag.getFullYear();
 
-    return (
-
-        vandaag.getFullYear()
-        + "-"
-        + String(
+    const maand =
+        String(
             vandaag.getMonth() + 1
-        ).padStart(2, "0")
-        + "-"
-        + String(
-            vandaag.getDate()
-        ).padStart(2, "0")
+        ).padStart(2, "0");
 
-    );
+    const dag =
+        String(
+            vandaag.getDate()
+        ).padStart(2, "0");
+
+    return `${jaar}-${maand}-${dag}`;
 
 }
 
@@ -481,28 +426,32 @@ function nieuwId() {
 
 
 // ======================================
-// GESELECTEERDE INKOMSTEN
+// INKOMSTEN MAAND
 // ======================================
 
 function geselecteerdeInkomsten() {
 
     return inkomsten.filter(
         inkomen =>
-            hoortInMaand(inkomen)
+            valtInGeselecteerdeMaand(
+                inkomen.datum
+            )
     );
 
 }
 
 
 // ======================================
-// GESELECTEERDE UITGAVEN
+// UITGAVEN MAAND
 // ======================================
 
 function geselecteerdeUitgaven() {
 
     return uitgaven.filter(
         uitgave =>
-            hoortInMaand(uitgave)
+            valtInGeselecteerdeMaand(
+                uitgave.datum
+            )
     );
 
 }
@@ -521,7 +470,7 @@ function totaalVan(lijst) {
         ) => {
 
             return totaal +
-                Number(item.bedrag);
+                Number(item.bedrag || 0);
 
         },
         0
@@ -531,7 +480,53 @@ function totaalVan(lijst) {
 
 
 // ======================================
-// OVERZICHT
+// HERHALING WEERGEVEN
+// ======================================
+
+function herhalingNaam(waarde) {
+
+    if (waarde === "maandelijks") {
+        return "Maandelijks";
+    }
+
+    if (waarde === "per kwartaal") {
+        return "Per kwartaal";
+    }
+
+    return "Eenmalig";
+
+}
+
+
+// ======================================
+// DATUM WEERGEVEN
+// ======================================
+
+function datumWeergeven(datum) {
+
+    if (!datum) {
+        return "";
+    }
+
+    const datumObject =
+        new Date(
+            datum + "T00:00:00"
+        );
+
+    return datumObject.toLocaleDateString(
+        "nl-NL",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+// ======================================
+// OVERZICHT BIJWERKEN
 // ======================================
 
 function overzichtBijwerken() {
@@ -542,7 +537,6 @@ function overzichtBijwerken() {
     const maandUitgaven =
         geselecteerdeUitgaven();
 
-
     const totaalInk =
         totaalVan(
             maandInkomsten
@@ -552,7 +546,6 @@ function overzichtBijwerken() {
         totaalVan(
             maandUitgaven
         );
-
 
     const over =
         totaalInk -
@@ -588,416 +581,215 @@ function overzichtBijwerken() {
 
 
 // ======================================
-// CATEGORIE NAMEN
-// ======================================
-
-function categorieNaam(categorie) {
-
-    const namen = {
-
-        loon:
-            "💼 Inkomsten uit loon",
-
-        overheid:
-            "🏛️ Toeslagen overheid",
-
-        gemeente:
-            "🏢 Toeslagen gemeente",
-
-        wonen:
-            "🏠 Wonen",
-
-        energie:
-            "⚡ Energie & water",
-
-        boodschappen:
-            "🛒 Boodschappen",
-
-        vervoer:
-            "🚗 Vervoer",
-
-        verzekeringen:
-            "🛡️ Verzekeringen",
-
-        abonnementen:
-            "📱 Abonnementen",
-
-        gezondheid:
-            "❤️ Gezondheid",
-
-        "vrije-tijd":
-            "🎮 Vrije tijd",
-
-        kleding:
-            "👕 Kleding",
-
-        overig:
-            "📦 Overig"
-
-    };
-
-
-    return (
-        namen[categorie] ||
-        categorie ||
-        "Overig"
-    );
-
-}
-
-
-// ======================================
-// HERHALING NAAM
-// ======================================
-
-function herhalingNaam(herhaling) {
-
-    if (
-        herhaling ===
-        "maandelijks"
-    ) {
-
-        return "🔄 Maandelijks";
-
-    }
-
-
-    if (
-        herhaling ===
-        "per_kwartaal"
-    ) {
-
-        return "🔄 Per kwartaal";
-
-    }
-
-
-    return "";
-
-}
-
-
-// ======================================
-// DATUM WEERGEVEN
-// ======================================
-
-function datumWeergeven(datum) {
-
-    const datumObject =
-        veiligeDatum(datum);
-
-    if (!datumObject) {
-        return "";
-    }
-
-
-    return datumObject.toLocaleDateString(
-        "nl-NL",
-        {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-        }
-    );
-
-}
-
-
-// ======================================
-// TRANSACTIE KAART MAKEN
-// ======================================
-
-function transactieKaart(
-    item,
-    type
-) {
-
-    const kaart =
-        document.createElement(
-            "article"
-        );
-
-
-    kaart.className =
-        "transactie " +
-        (
-            type === "inkomst"
-                ? "transactie-inkomst"
-                : "transactie-uitgave"
-        );
-
-
-    // ------------------------------
-    // INFO
-    // ------------------------------
-
-    const informatie =
-        document.createElement(
-            "div"
-        );
-
-    informatie.className =
-        "transactie-info";
-
-
-    const omschrijving =
-        document.createElement(
-            "strong"
-        );
-
-    omschrijving.className =
-        "transactie-omschrijving";
-
-    omschrijving.textContent =
-        item.omschrijving;
-
-
-    const details =
-        document.createElement(
-            "span"
-        );
-
-    details.className =
-        "transactie-details";
-
-    details.textContent =
-        categorieNaam(
-            item.categorie
-        )
-        +
-        " • "
-        +
-        datumWeergeven(
-            item.datum
-        );
-
-
-    informatie.appendChild(
-        omschrijving
-    );
-
-    informatie.appendChild(
-        details
-    );
-
-
-    // ------------------------------
-    // BEDRAG
-    // ------------------------------
-
-    const bedrag =
-        document.createElement(
-            "strong"
-        );
-
-    bedrag.className =
-        "transactie-bedrag";
-
-
-    bedrag.textContent =
-        type === "inkomst"
-
-            ? "+ " + euro(item.bedrag)
-
-            : "− " + euro(item.bedrag);
-
-
-    // ------------------------------
-    // ACTIES
-    // ------------------------------
-
-    const acties =
-        document.createElement(
-            "div"
-        );
-
-    acties.className =
-        "transactie-acties";
-
-
-    const bewerkKnop =
-        document.createElement(
-            "button"
-        );
-
-    bewerkKnop.className =
-        "bewerk-transactie";
-
-    bewerkKnop.textContent =
-        "✏️";
-
-    bewerkKnop.title =
-        type === "inkomst"
-            ? "Inkomen bewerken"
-            : "Uitgave bewerken";
-
-
-    bewerkKnop.addEventListener(
-        "click",
-        () => {
-
-            if (type === "inkomst") {
-
-                inkomenBewerken(item);
-
-            } else {
-
-                uitgaveBewerken(item);
-
-            }
-
-        }
-    );
-
-
-    const verwijderKnop =
-        document.createElement(
-            "button"
-        );
-
-    verwijderKnop.className =
-        "verwijder-transactie";
-
-    verwijderKnop.textContent =
-        "🗑️";
-
-    verwijderKnop.title =
-        type === "inkomst"
-            ? "Inkomen verwijderen"
-            : "Uitgave verwijderen";
-
-
-    verwijderKnop.addEventListener(
-        "click",
-        () => {
-
-            const bevestiging =
-                confirm(
-                    `Weet je zeker dat je "${item.omschrijving}" wilt verwijderen?`
-                );
-
-
-            if (!bevestiging) {
-                return;
-            }
-
-
-            if (type === "inkomst") {
-
-                inkomsten =
-                    inkomsten.filter(
-                        inkomen =>
-                            inkomen.id !==
-                            item.id
-                    );
-
-                inkomstenOpslaan();
-
-            } else {
-
-                uitgaven =
-                    uitgaven.filter(
-                        uitgave =>
-                            uitgave.id !==
-                            item.id
-                    );
-
-                uitgavenOpslaan();
-
-            }
-
-
-            budgetWeergeven();
-
-        }
-    );
-
-
-    acties.appendChild(
-        bewerkKnop
-    );
-
-    acties.appendChild(
-        verwijderKnop
-    );
-
-
-    // ------------------------------
-    // HERHALING
-    // ------------------------------
-
-    const herhaling =
-        herhalingNaam(
-            item.herhaling
-        );
-
-
-    if (herhaling) {
-
-        const herhalingElement =
-            document.createElement(
-                "small"
-            );
-
-        herhalingElement.className =
-            "herhaling";
-
-        herhalingElement.textContent =
-            herhaling;
-
-        informatie.appendChild(
-            herhalingElement
-        );
-
-    }
-
-
-    kaart.appendChild(
-        informatie
-    );
-
-    kaart.appendChild(
-        bedrag
-    );
-
-    kaart.appendChild(
-        acties
-    );
-
-
-    return kaart;
-
-}
-
-
-// ======================================
 // INKOMSTEN WEERGEVEN
 // ======================================
 
 function inkomstenWeergeven() {
 
-    inkomstenLijst.innerHTML =
-        "";
+    inkomstenLijst.innerHTML = "";
 
-
-    const lijst =
+    const maandInkomsten =
         geselecteerdeInkomsten();
 
 
     geenInkomsten.style.display =
-        lijst.length === 0
+        maandInkomsten.length === 0
             ? "block"
             : "none";
 
 
-    lijst.forEach(
+    maandInkomsten.forEach(
         inkomen => {
 
+            const kaart =
+                document.createElement(
+                    "article"
+                );
+
+            kaart.className =
+                "transactie transactie-inkomst";
+
+
+            const informatie =
+                document.createElement(
+                    "div"
+                );
+
+            informatie.className =
+                "transactie-info";
+
+
+            const omschrijving =
+                document.createElement(
+                    "strong"
+                );
+
+            omschrijving.className =
+                "transactie-omschrijving";
+
+            omschrijving.textContent =
+                inkomen.omschrijving;
+
+
+            const details =
+                document.createElement(
+                    "span"
+                );
+
+            details.className =
+                "transactie-details";
+
+            details.textContent =
+                `${inkomstenCategorieNamen[
+                    inkomen.categorie
+                ] || inkomen.categorie}
+                 •
+                 ${datumWeergeven(
+                     inkomen.datum
+                 )}`;
+
+
+            informatie.appendChild(
+                omschrijving
+            );
+
+            informatie.appendChild(
+                details
+            );
+
+
+            const rechts =
+                document.createElement(
+                    "div"
+                );
+
+            rechts.className =
+                "transactie-rechts";
+
+
+            const bedrag =
+                document.createElement(
+                    "strong"
+                );
+
+            bedrag.className =
+                "transactie-bedrag";
+
+            bedrag.textContent =
+                `+ ${euro(
+                    inkomen.bedrag
+                )}`;
+
+
+            const acties =
+                document.createElement(
+                    "div"
+                );
+
+            acties.className =
+                "transactie-acties";
+
+
+            const bewerkKnop =
+                document.createElement(
+                    "button"
+                );
+
+            bewerkKnop.className =
+                "bewerk-transactie";
+
+            bewerkKnop.textContent =
+                "✏️";
+
+            bewerkKnop.title =
+                "Inkomen bewerken";
+
+
+            bewerkKnop.addEventListener(
+                "click",
+                () => {
+
+                    inkomenBewerken(
+                        inkomen
+                    );
+
+                }
+            );
+
+
+            const verwijderKnop =
+                document.createElement(
+                    "button"
+                );
+
+            verwijderKnop.className =
+                "verwijder-transactie";
+
+            verwijderKnop.textContent =
+                "🗑️";
+
+            verwijderKnop.title =
+                "Inkomen verwijderen";
+
+
+            verwijderKnop.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        !confirm(
+                            `Weet je zeker dat je "${inkomen.omschrijving}" wilt verwijderen?`
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    inkomsten =
+                        inkomsten.filter(
+                            item =>
+                                item.id !==
+                                inkomen.id
+                        );
+
+
+                    inkomstenOpslaan();
+
+                    budgetWeergeven();
+
+                }
+            );
+
+
+            acties.appendChild(
+                bewerkKnop
+            );
+
+            acties.appendChild(
+                verwijderKnop
+            );
+
+
+            rechts.appendChild(
+                bedrag
+            );
+
+            rechts.appendChild(
+                acties
+            );
+
+
+            kaart.appendChild(
+                informatie
+            );
+
+            kaart.appendChild(
+                rechts
+            );
+
+
             inkomstenLijst.appendChild(
-                transactieKaart(
-                    inkomen,
-                    "inkomst"
-                )
+                kaart
             );
 
         }
@@ -1012,32 +804,370 @@ function inkomstenWeergeven() {
 
 function uitgavenWeergeven() {
 
-    uitgavenLijst.innerHTML =
-        "";
+    uitgavenLijst.innerHTML = "";
 
 
-    const lijst =
+    let maandUitgaven =
         geselecteerdeUitgaven();
 
 
+    // FILTER ACTIEVE CATEGORIE
+
+    if (actieveUitgavenCategorie) {
+
+        maandUitgaven =
+            maandUitgaven.filter(
+                uitgave =>
+                    uitgave.categorie ===
+                    actieveUitgavenCategorie
+            );
+
+    }
+
+
     geenUitgaven.style.display =
-        lijst.length === 0
+        maandUitgaven.length === 0
             ? "block"
             : "none";
 
 
-    lijst.forEach(
+    // TEKST AANPASSEN ALS FILTER ACTIEF IS
+
+    if (
+        actieveUitgavenCategorie &&
+        maandUitgaven.length === 0
+    ) {
+
+        geenUitgaven.textContent =
+            "Geen uitgaven in deze categorie deze maand.";
+
+    }
+    else {
+
+        geenUitgaven.textContent =
+            "Nog geen uitgaven toegevoegd.";
+
+    }
+
+
+    // TRANSACTIES MAKEN
+
+    maandUitgaven.forEach(
         uitgave => {
 
+            const kaart =
+                document.createElement(
+                    "article"
+                );
+
+            kaart.className =
+                "transactie transactie-uitgave";
+
+
+            const informatie =
+                document.createElement(
+                    "div"
+                );
+
+            informatie.className =
+                "transactie-info";
+
+
+            const omschrijving =
+                document.createElement(
+                    "strong"
+                );
+
+            omschrijving.className =
+                "transactie-omschrijving";
+
+            omschrijving.textContent =
+                uitgave.omschrijving;
+
+
+            const details =
+                document.createElement(
+                    "span"
+                );
+
+            details.className =
+                "transactie-details";
+
+            details.textContent =
+                `${categorieNamen[
+                    uitgave.categorie
+                ] || uitgave.categorie}
+                 •
+                 ${datumWeergeven(
+                     uitgave.datum
+                 )}`;
+
+
+            informatie.appendChild(
+                omschrijving
+            );
+
+            informatie.appendChild(
+                details
+            );
+
+
+            const rechts =
+                document.createElement(
+                    "div"
+                );
+
+            rechts.className =
+                "transactie-rechts";
+
+
+            const bedrag =
+                document.createElement(
+                    "strong"
+                );
+
+            bedrag.className =
+                "transactie-bedrag";
+
+            bedrag.textContent =
+                `− ${euro(
+                    uitgave.bedrag
+                )}`;
+
+
+            const acties =
+                document.createElement(
+                    "div"
+                );
+
+            acties.className =
+                "transactie-acties";
+
+
+            const bewerkKnop =
+                document.createElement(
+                    "button"
+                );
+
+            bewerkKnop.className =
+                "bewerk-transactie";
+
+            bewerkKnop.textContent =
+                "✏️";
+
+            bewerkKnop.title =
+                "Uitgave bewerken";
+
+
+            bewerkKnop.addEventListener(
+                "click",
+                () => {
+
+                    uitgaveBewerken(
+                        uitgave
+                    );
+
+                }
+            );
+
+
+            const verwijderKnop =
+                document.createElement(
+                    "button"
+                );
+
+            verwijderKnop.className =
+                "verwijder-transactie";
+
+            verwijderKnop.textContent =
+                "🗑️";
+
+            verwijderKnop.title =
+                "Uitgave verwijderen";
+
+
+            verwijderKnop.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        !confirm(
+                            `Weet je zeker dat je "${uitgave.omschrijving}" wilt verwijderen?`
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    uitgaven =
+                        uitgaven.filter(
+                            item =>
+                                item.id !==
+                                uitgave.id
+                        );
+
+
+                    uitgavenOpslaan();
+
+                    budgetWeergeven();
+
+                }
+            );
+
+
+            acties.appendChild(
+                bewerkKnop
+            );
+
+            acties.appendChild(
+                verwijderKnop
+            );
+
+
+            rechts.appendChild(
+                bedrag
+            );
+
+            rechts.appendChild(
+                acties
+            );
+
+
+            kaart.appendChild(
+                informatie
+            );
+
+            kaart.appendChild(
+                rechts
+            );
+
+
             uitgavenLijst.appendChild(
-                transactieKaart(
-                    uitgave,
-                    "uitgave"
-                )
+                kaart
             );
 
         }
     );
+
+
+    categorieOverzichtBijwerken();
+
+}
+
+
+// ======================================
+// CATEGORIE OVERZICHT
+// ======================================
+
+function categorieOverzichtBijwerken() {
+
+    if (!actieveUitgavenCategorie) {
+
+        categorieOverzicht.classList.add(
+            "verborgen"
+        );
+
+        return;
+
+    }
+
+
+    const maandUitgaven =
+        geselecteerdeUitgaven();
+
+
+    const categorieUitgaven =
+        maandUitgaven.filter(
+            uitgave =>
+                uitgave.categorie ===
+                actieveUitgavenCategorie
+        );
+
+
+    const totaal =
+        totaalVan(
+            categorieUitgaven
+        );
+
+
+    categorieOverzicht.classList.remove(
+        "verborgen"
+    );
+
+
+    actieveCategorie.textContent =
+        categorieNamen[
+            actieveUitgavenCategorie
+        ] ||
+        actieveUitgavenCategorie;
+
+
+    categorieTotaal.textContent =
+        euro(totaal);
+
+}
+
+
+// ======================================
+// CATEGORIE FILTER ACTIVEREN
+// ======================================
+
+function categorieFilterInstellen(
+    categorie
+) {
+
+    actieveUitgavenCategorie =
+        categorie;
+
+
+    document
+        .querySelectorAll(
+            ".categorie-uitgave"
+        )
+        .forEach(
+            knop => {
+
+                knop.classList.toggle(
+                    "actief",
+                    knop.dataset.categorie ===
+                    categorie
+                );
+
+            }
+        );
+
+
+    uitgavenWeergeven();
+
+}
+
+
+// ======================================
+// ALLE UITGAVEN TONEN
+// ======================================
+
+function alleUitgavenTonen() {
+
+    actieveUitgavenCategorie =
+        null;
+
+
+    document
+        .querySelectorAll(
+            ".categorie-uitgave"
+        )
+        .forEach(
+            knop => {
+
+                knop.classList.remove(
+                    "actief"
+                );
+
+            }
+        );
+
+
+    uitgavenWeergeven();
 
 }
 
@@ -1228,13 +1358,9 @@ inkomstOpslaan.addEventListener(
             }
 
 
-            delete
-                inkomstenFormulier
-                    .dataset
-                    .bewerkId;
+            delete inkomstenFormulier.dataset.bewerkId;
 
         }
-
         else {
 
             inkomsten.push({
@@ -1264,13 +1390,10 @@ inkomstOpslaan.addEventListener(
 
         inkomstenOpslaan();
 
-
         inkomstenFormulier.reset();
-
 
         inkomstDatum.value =
             vandaagVoorInput();
-
 
         budgetWeergeven();
 
@@ -1390,13 +1513,9 @@ uitgaveOpslaan.addEventListener(
             }
 
 
-            delete
-                uitgavenFormulier
-                    .dataset
-                    .bewerkId;
+            delete uitgavenFormulier.dataset.bewerkId;
 
         }
-
         else {
 
             uitgaven.push({
@@ -1426,17 +1545,50 @@ uitgaveOpslaan.addEventListener(
 
         uitgavenOpslaan();
 
-
         uitgavenFormulier.reset();
-
 
         uitgaveDatum.value =
             vandaagVoorInput();
 
-
         budgetWeergeven();
 
     }
+);
+
+
+// ======================================
+// CATEGORIE KNOPPEN
+// ======================================
+
+document
+    .querySelectorAll(
+        ".categorie-uitgave"
+    )
+    .forEach(
+        knop => {
+
+            knop.addEventListener(
+                "click",
+                () => {
+
+                    categorieFilterInstellen(
+                        knop.dataset.categorie
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+// ======================================
+// ALLE UITGAVEN
+// ======================================
+
+alleUitgavenKnop.addEventListener(
+    "click",
+    alleUitgavenTonen
 );
 
 
@@ -1485,8 +1637,7 @@ volgendeMaandKnop.addEventListener(
 
 
 // ======================================
-// KLIK OP MAANDNAAM
-// TERUG NAAR HUIDIGE MAAND
+// HUIDIGE MAAND
 // ======================================
 
 huidigeMaandKnop.addEventListener(
@@ -1550,6 +1701,10 @@ allesWissenKnop.addEventListener(
         inkomstenOpslaan();
 
         uitgavenOpslaan();
+
+
+        actieveUitgavenCategorie =
+            null;
 
 
         budgetWeergeven();
